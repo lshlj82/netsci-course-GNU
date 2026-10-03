@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>경상국립대학교 물리학과 네트워크 과학 교과목 보조자료</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕸️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&family=Public+Sans:wght@400;600&family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #eef1f4;
+    --ink: #18233a;
+    --muted: #55607a;
+    --rule: #c9d0db;
+    --node: #2f5bd3;
+    --hub: #d6453d;
+    --edge: #8f9ab0;
+    --hi: #e0a800;
+    --accent: #b5770f;
+    --serif: "STIX Two Text", "Noto Serif KR", "Cambria", "Times New Roman", serif;
+    --sans: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #141c2b;
+      --ink: #e4e9f2;
+      --muted: #9aa5bb;
+      --rule: #2e3a52;
+      --node: #6f93f2;
+      --hub: #ff6b5e;
+      --edge: #5a6884;
+      --hi: #f5d24e;
+      --accent: #e3a43a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #141c2b;
+    --ink: #e4e9f2;
+    --muted: #9aa5bb;
+    --rule: #2e3a52;
+    --node: #6f93f2;
+    --hub: #ff6b5e;
+    --edge: #5a6884;
+      --hi: #f5d24e;
+    --accent: #e3a43a;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.5rem; }
+  .ko { color: var(--muted); word-break: keep-all; }
+
+  /* Hero */
+  .hero { padding: 4.5rem 0 3rem; }
+  .hero-text { max-width: 48rem; }
+  .hero h1 {
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    word-break: keep-all;
+    margin: 0 0 1.25rem;
+  }
+  .hero-text p { margin: 0; max-width: 40rem; color: var(--muted); font-size: 1.2rem; }
+  .hero-text .credit { margin-top: 1.25rem; font-family: var(--sans); font-size: 0.95rem; }
+  .credit span { display: block; }
+  .net-figure { margin: 3rem 0 0; }
+  .panels {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 2rem;
+  }
+  #netView { display: block; width: 100%; aspect-ratio: 3 / 2; }
+  #degView { display: block; width: 100%; aspect-ratio: 1; }
+  .panel p { margin: 0.75rem 0 0; font-size: 1rem; line-height: 1.55; }
+  .panel p .ko { display: block; margin-top: 0.4rem; font-size: 0.92rem; }
+  .c-node { color: var(--node); }
+  .c-hub { color: var(--hub); }
+  .c-hi { color: var(--hi); font-weight: 600; }
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    max-width: 44rem;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+  }
+  .controls label { display: flex; align-items: center; gap: 0.6rem; flex: 1; min-width: 12rem; }
+  .controls label > span { font-family: var(--serif); font-size: 1.1rem; }
+  .controls input[type="range"] { flex: 1; accent-color: var(--node); min-width: 0; }
+  .controls output { font-variant-numeric: tabular-nums; min-width: 1.8rem; }
+  .controls button {
+    font: inherit;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 0.25rem 0.7rem;
+    cursor: pointer;
+  }
+  .controls button:hover { border-color: var(--ink); }
+  .seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .controls .seg button { border: 0; border-radius: 0; padding: 0.25rem 0.7rem; }
+  .controls .seg button + button { border-left: 1px solid var(--rule); }
+  .controls .seg button[aria-pressed="true"] { background: var(--node); color: var(--paper); font-weight: 600; }
+  .net-figure figcaption {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.6rem;
+  }
+
+  /* Demo list */
+  .part { padding: 2.25rem 0 1rem; border-top: 1px solid var(--rule); }
+  .part h2 {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+    color: var(--muted);
+  }
+  .demos { list-style: none; margin: 0; padding: 0; }
+  .demo {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr minmax(14rem, 24rem);
+    gap: 0 1.5rem;
+    padding: 1.4rem 0;
+    align-items: baseline;
+  }
+  .demo + .demo { border-top: 1px dashed var(--rule); }
+  .num { font-size: 1.5rem; color: var(--accent); font-variant-numeric: oldstyle-nums; }
+  .demo h3 { font-size: 1.55rem; font-weight: 600; line-height: 1.2; margin: 0 0 0.35rem; }
+  .demo h3 a { text-decoration: none; }
+  .demo h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  h3 .ko { display: block; font-size: 1.05rem; font-weight: 400; margin-top: 0.15rem; }
+  .demo p { margin: 0 0 0.6rem; max-width: 36rem; }
+  .links { font-family: var(--sans); font-size: 0.9rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .links a { text-underline-offset: 3px; }
+  .links a.primary { font-weight: 600; color: var(--node); }
+  .eq { font-size: 1.15rem; line-height: 1.5; text-align: right; overflow-x: auto; white-space: nowrap; }
+  .eq sup, .eq sub { font-size: 0.68em; line-height: 0; }
+  .eq .bf { font-weight: 600; font-style: normal; }
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; font-size: 0.95em; }
+  .frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 0.2em; }
+  .frac > span:last-child { padding: 0 0.2em; }
+  .big { font-size: 1.3em; }
+
+  .refs ul { margin: 0.5rem 0 1.5rem; padding-left: 1.2rem; max-width: 46rem; }
+  .refs li { margin-bottom: 0.8rem; }
+  .refs a { text-underline-offset: 3px; text-decoration-color: var(--rule); }
+  .refs a:hover { text-decoration-color: currentColor; }
+  .tr { display: block; font-family: var(--sans); font-size: 0.9rem; color: var(--muted); margin-top: 0.15rem; }
+  .promo {
+    max-width: 46rem;
+    margin: 0.5rem 0 2rem;
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--accent);
+    background: color-mix(in srgb, var(--accent) 7%, transparent);
+    word-break: keep-all;
+  }
+  .promo p { margin: 0 0 0.6rem; }
+  .promo-title { font-weight: 600; font-size: 1.2rem; }
+  .promo-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0 !important; font-family: var(--sans); font-size: 0.95rem; }
+  .promo-links a { font-weight: 600; color: var(--node); text-decoration: none; }
+  .promo-links a::after { content: " →"; }
+  .promo-links a:hover { text-decoration: underline; }
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem 0 3rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 52rem) {
+    .hero { padding-top: 3rem; }
+    .panels { grid-template-columns: 1fr; }
+    #degView { max-width: 26rem; }
+    .demo { grid-template-columns: 2rem 1fr; }
+    .eq { grid-column: 2; text-align: left; margin-top: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <h1 lang="ko">경상국립대학교 물리학과<br>네트워크 과학 교과목 보조자료</h1>
+      <p>Eight browser simulations that accompany the course, from the basic elements of a network to dynamics on networks. Open any demo to change the parameters and watch the network respond.</p>
+      <p class="ko" lang="ko" style="margin-top:0.6rem">네트워크의 기본 요소에서 네트워크 동역학까지, 강의와 함께 보는 여덟 가지 브라우저 시뮬레이션입니다. 데모를 열어 매개변수를 바꾸며 네트워크가 어떻게 달라지는지 확인해 보세요.</p>
+      <p class="credit">Created by Claude Opus 5.5, based on the lecture slides by Prof. Sang Hoon Lee.<span lang="ko">이상훈 교수의 강의 슬라이드를 바탕으로 Claude Opus 5.5가 만들었습니다.</span></p>
+    </div>
+    <figure class="net-figure">
+      <div class="panels">
+        <div class="panel">
+          <canvas id="netView" aria-label="A configuration model network being assembled by joining stubs in pairs"></canvas>
+          <p>The configuration model, assembled stub by stub. Each node starts with a number of <span class="c-node">stubs</span> (dangling half-links) drawn from a Poisson or a power-law distribution, and random pairs of stubs are <span class="c-hi">joined</span> into links one at a time. A pair that would make a self-loop or a multi-edge is rejected and drawn again, so the result is a simple graph.<span class="ko" lang="ko"><span class="c-node">미연결 링크</span>를 하나씩 이어 조립하는 구성 모형. 각 노드는 푸아송 분포 또는 거듭제곱 분포에서 뽑은 개수의 미연결 링크를 가지고 시작하며, 무작위로 고른 미연결 링크 한 쌍이 차례로 <span class="c-hi">이어져</span> 링크가 됩니다. 자기 고리나 중복 링크를 만드는 쌍은 버리고 다시 고르므로, 결과는 단순 그래프입니다.</span></p>
+        </div>
+        <div class="panel">
+          <canvas id="degView" aria-label="Degree distribution: target sequence, links formed so far, and the theoretical distribution"></canvas>
+          <p>Degree distribution: the target sequence (circles), the links formed so far (dots), and the theory (dashed): the Poisson distribution <i>p</i><sub><i>k</i></sub> = <i>e</i><sup>−<i>c</i></sup><i>c</i><sup><i>k</i></sup>/<i>k</i>!, or the power law <i>p</i><sub><i>k</i></sub> ∝ <i>k</i><sup>−<i>γ</i></sup> for 2 ≤ <i>k</i> ≤ 40 on log–log axes with logarithmic bins.<span class="ko" lang="ko">연결선수 분포: 목표 연결선수열(빈 원), 지금까지 만들어진 링크로 센 연결선수(점), 이론 분포(점선): 푸아송 분포, 또는 로그 구간으로 묶어 로그–로그 축에 그린 거듭제곱 분포 <i>p</i><sub><i>k</i></sub> ∝ <i>k</i><sup>−<i>γ</i></sup> (2 ≤ <i>k</i> ≤ 40).</span></p>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Degree distribution">
+          <button type="button" data-mode="poisson" aria-pressed="true">Poisson</button>
+          <button type="button" data-mode="power" aria-pressed="false">Power law</button>
+        </div>
+        <label>
+          <span id="pLabel"><i>c</i> = ⟨<i>k</i>⟩</span>
+          <input id="cInput" type="range" min="1" max="6" step="0.5" value="3">
+          <output id="cOut" for="cInput">3</output>
+        </label>
+        <button id="toggle" type="button">Pause</button>
+        <button id="restart" type="button">Restart</button>
+      </div>
+      <figcaption>From demo 6, <a href="https://lshlj82.github.io/network-models/">Network models</a>. <span lang="ko">데모 6 「네트워크 모형」에서.</span></figcaption>
+    </figure>
+  </header>
+
+  <main>
+    <section class="part" aria-labelledby="part-demos">
+      <h2 id="part-demos">Demos <span class="ko" lang="ko">데모 목록</span></h2>
+      <ol class="demos">
+        <li class="demo">
+          <span class="num">1</span>
+          <div>
+            <h3><a href="https://lshlj82.github.io/network-basics/">Network elements</a><span class="ko" lang="ko">네트워크의 기본 요소</span></h3>
+            <p>Nodes, links, degree, the adjacency matrix and paths: the vocabulary for describing any network.</p>
+            <p class="ko" lang="ko">노드, 링크, 연결선수, 인접 행렬, 경로 등 네트워크를 기술하는 기본 개념.</p>
+            <div class="links">
+              <a class="primary" href="https://lshlj82.github.io/network-basics/">Open demo</a>
+              <a href="https://github.com/lshlj82/network-basics">Source on GitHub</a>
+            </div>
+          </div>
+          <div class="eq" aria-label="mean degree equals 2m over n">
+            ⟨<i>k</i>⟩ = <span class="frac"><span>2<i>m</i></span><span><i>n</i></span></span>
+          </div>
+        </li>
+        <li class="demo">
+          <span class="num">2</span>
+          <div>
+            <h3><a href="https://lshlj82.github.io/diffusion-on-networks/">Diffusion on networks</a><span class="ko" lang="ko">네트워크 위의 확산</span></h3>
+            <p>How a quantity spreads from node to node along links, governed by the graph Laplacian.</p>
+            <p class="ko" lang="ko">그래프 라플라시안을 따라 어떤 양이 링크를 통해 노드에서 노드로 퍼져 나가는 과정.</p>
+            <div class="links">
+              <a class="primary" href="https://lshlj82.github.io/diffusion-on-networks/">Open demo</a>
+              <a href="https://github.com/lshlj82/diffusion-on-networks">Source on GitHub</a>
+            </div>
+          </div>
+          <div class="eq" aria-label="d psi d t equals minus L psi, where L equals D minus A">
+            <span class="frac"><span>d<i>ψ</i></span><span>d<i>t</i></span></span> = −<span class="bf">L</span><i>ψ</i>, &nbsp;<span class="bf">L</span> = <span class="bf">D</span> − <span class="bf">A</span>
+          </div>
+        </li>
+        <li class="demo">
+          <span class="num">3</span>
+          <div>
+            <h3><a href="https://lshlj82.github.io/network-assortativity/">Network assortativity</a><span class="ko" lang="ko">네트워크 동류성</span></h3>
+            <p>Do hubs link to hubs? Degree correlations and the assortativity coefficient.</p>
+            <p class="ko" lang="ko">허브는 허브끼리 연결될까? 연결선수 상관관계와 동류성 계수.</p>
+            <div class="links">
+              <a class="primary" href="https://lshlj82.github.io/network-assortativity/">Open demo</a>
+              <a href="https://github.com/lshlj82/network-assortativity">Source on GitHub</a>
+            </div>
+          </div>
+          <div class="eq" aria-label="assortativity coefficient r">
+            <i>r</i> = <span class="frac"><span>∑<sub><i>ij</i></sub> (<i>A</i><sub><i>ij</i></sub> − <i>k</i><sub><i>i</i></sub><i>k</i><sub><i>j</i></sub>/2<i>m</i>) <i>k</i><sub><i>i</i></sub><i>k</i><sub><i>j</i></sub></span><span>∑<sub><i>ij</i></sub> (<i>k</i><sub><i>i</i></sub><i>δ</i><sub><i>ij</i></sub> − <i>k</i><sub><i>i</i></sub><i>k</i><sub><i>j</i></sub>/2<i>m</i>) <i>k</i><sub><i>i</i></sub><i>k</i><sub><i>j</i></sub></span></span>
+          </div>
+        </li>
+        <li class="demo">
+          <span class="num">4</span>
+          <div>
+            <h3><a href="https://lshlj82.github.io/percolation-on-networks/">Percolation on networks</a><span class="ko" lang="ko">네트워크 위의 스며들기</span></h3>
+            <p>Removing nodes or links until the giant component breaks apart, and why heterogeneous networks are hard to break.</p>
+            <p class="ko" lang="ko">노드나 링크를 제거하며 거대 연결 덩어리가 무너지는 과정과, 불균일한 네트워크가 잘 부서지지 않는 이유.</p>
+            <div class="links">
+              <a class="primary" href="https://lshlj82.github.io/percolation-on-networks/">Open demo</a>
+              <a href="https://github.com/lshlj82/percolation-on-networks">Source on GitHub</a>
+            </div>
+          </div>
+          <div class="eq" aria-label="phi c equals mean k over mean k squared minus mean k">
+            <i>φ</i><sub>c</sub> = <span class="frac"><span>⟨<i>k</i>⟩</span><span>⟨<i>k</i><sup>2</sup>⟩ − ⟨<i>k</i>⟩</span></span>
+          </div>
+        </li>
+        <li class="demo">
+          <span class="num">5</span>
+          <div>
+            <h3><a href="https://lshlj82.github.io/SFN/">Scale-free networks</a><span class="ko" lang="ko">척도 없는 네트워크</span></h3>
+            <p>Heavy-tailed degree distributions, hubs, and growth by preferential attachment.</p>
+            <p class="ko" lang="ko">두꺼운 꼬리를 가진 연결선수 분포, 허브, 그리고 선호적 연결에 의한 성장.</p>
+            <div class="links">
+              <a class="primary" href="https://lshlj82.github.io/SFN/">Open demo</a>
+              <a href="https://github.com/lshlj82/SFN">Source on GitHub</a>
+            </div>
+          </div>
+          <div class="eq" aria-label="p k is proportional to k to the minus gamma">
+            <i>p</i><sub><i>k</i></sub> ∝ <i>k</i><sup>−<i>γ</i></sup>
+          </div>
+        </li>
+        <li class="demo">
+          <span class="num">6</span>
+          <div>
+            <h3><a href="https://lshlj82.github.io/network-models/">Network models</a><span class="ko" lang="ko">네트워크 모형</span></h3>
+            <p>Random graphs, small-world networks and other models, and the structure each one produces.</p>
+            <p class="ko" lang="ko">무작위 그래프, 좁은 세상 네트워크 등 여러 모형과 각 모형이 만들어 내는 구조.</p>
+            <div class="links">
+              <a class="primary" href="https://lshlj82.github.io/network-models/">Open demo</a>
+              <a href="https://github.com/lshlj82/network-models">Source on GitHub</a>
+            </div>
+          </div>
+          <div class="eq" aria-label="Poisson degree distribution p k equals e to the minus c, c to the k over k factorial">
+            <i>p</i><sub><i>k</i></sub> = <i>e</i><sup>−<i>c</i></sup> <span class="frac"><span><i>c</i><sup><i>k</i></sup></span><span><i>k</i>!</span></span>
+          </div>
+        </li>
+        <li class="demo">
+          <span class="num">7</span>
+          <div>
+            <h3><a href="https://lshlj82.github.io/network-community/">Network communities</a><span class="ko" lang="ko">네트워크 커뮤니티</span></h3>
+            <p>Finding groups of densely connected nodes, and measuring how good a division is with modularity.</p>
+            <p class="ko" lang="ko">촘촘히 연결된 노드 집단을 찾고, 모듈도로 나눈 결과가 얼마나 좋은지 평가하기.</p>
+            <div class="links">
+              <a class="primary" href="https://lshlj82.github.io/network-community/">Open demo</a>
+              <a href="https://github.com/lshlj82/network-community">Source on GitHub</a>
+            </div>
+          </div>
+          <div class="eq" aria-label="modularity Q">
+            <i>Q</i> = <span class="frac"><span>1</span><span>2<i>m</i></span></span> <span class="big">∑</span><sub><i>ij</i></sub> <span class="big">(</span><i>A</i><sub><i>ij</i></sub> − <span class="frac"><span><i>k</i><sub><i>i</i></sub><i>k</i><sub><i>j</i></sub></span><span>2<i>m</i></span></span><span class="big">)</span> <i>δ</i>(<i>g</i><sub><i>i</i></sub>, <i>g</i><sub><i>j</i></sub>)
+          </div>
+        </li>
+        <li class="demo">
+          <span class="num">8</span>
+          <div>
+            <h3><a href="https://lshlj82.github.io/network-dynamics/">Network dynamics</a><span class="ko" lang="ko">네트워크 동역학</span></h3>
+            <p>Dynamical processes running on networks, and how the structure of the network shapes their behavior.</p>
+            <p class="ko" lang="ko">네트워크 위에서 일어나는 동역학 과정과, 네트워크 구조가 그 거동에 미치는 영향.</p>
+            <div class="links">
+              <a class="primary" href="https://lshlj82.github.io/network-dynamics/">Open demo</a>
+              <a href="https://github.com/lshlj82/network-dynamics">Source on GitHub</a>
+            </div>
+          </div>
+          <div class="eq" aria-label="d x i d t equals f of x i plus sum over j of A i j g of x i x j">
+            <span class="frac"><span>d<i>x</i><sub><i>i</i></sub></span><span>d<i>t</i></span></span> = <i>f</i>(<i>x</i><sub><i>i</i></sub>) + <span class="big">∑</span><sub><i>j</i></sub> <i>A</i><sub><i>ij</i></sub> <i>g</i>(<i>x</i><sub><i>i</i></sub>, <i>x</i><sub><i>j</i></sub>)
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="part refs" aria-labelledby="part-refs">
+      <h2 id="part-refs">References <span class="ko" lang="ko">참고문헌</span></h2>
+      <ul class="books">
+        <li>
+          <a href="https://scholar.google.com/citations?user=f_kGJwkAAAAJ">Filippo Menczer</a>, <a href="https://scholar.google.com/citations?user=NDrCCokAAAAJ">Santo Fortunato</a>, and <a href="https://scholar.google.com/citations?user=oZC6UJsAAAAJ">Clayton A. Davis</a>, <a href="https://www.amazon.com/First-Course-Network-Science/dp/1108471137"><i>A First Course in Network Science</i></a> (Cambridge University Press, 2020).
+          <span class="tr" lang="ko">한국어판 <a href="https://www.acornpub.co.kr/product/네트워크-분석/5797/category/25/display/1/">『네트워크 분석』</a> (에이콘출판사, 2022)</span>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=rQ68pVwAAAAJ&amp;hl=en">Mark Newman</a>, <a href="https://www.amazon.com/Networks-Mark-Newman/dp/0198805098/"><i>Networks</i>, 2nd Edition</a> (Oxford University Press, 2018).
+          <span class="tr" lang="ko">한국어판 <a href="https://www.acornpub.co.kr/product/네트워크-2e/5888/category/25/display/1/">『네트워크 2/e』</a> (에이콘출판사, 2022)</span>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=vsj2slIAAAAJ&amp;hl=en">Albert-László Barabási</a>, <a href="https://networksciencebook.com"><i>Network Science</i></a> (Cambridge University Press, 2016).
+          <span class="tr" lang="ko">한국어판 <a href="https://www.acornpub.co.kr/product/네트워크-사이언스/5911/category/25/display/1/">『네트워크 사이언스』</a> (에이콘출판사, 2023)</span>
+        </li>
+        <li>
+          <a href="https://scholar.google.com/citations?user=BeedFHMAAAAJ">Sergey N. Dorogovtsev</a> and <a href="https://scholar.google.com/citations?user=g0PnXHIAAAAJ">José F. F. Mendes</a>, <a href="https://global.oup.com/academic/product/the-nature-of-complex-networks-9780199695119"><i>The Nature of Complex Networks</i></a> (Oxford University Press, 2022).
+          <span class="tr" lang="ko">한국어판 <a href="https://www.acornpub.co.kr/product/복잡계-네트워크의-자연법칙/6086/category/24/display/1/">『복잡계 네트워크의 자연법칙』</a> (에이콘출판사, 2026)</span>
+        </li>
+        <li>Prof. Sang Hoon Lee, lecture slides for Network Science. <span class="ko" lang="ko">이상훈 교수, 네트워크 과학 강의 슬라이드.</span></li>
+      </ul>
+      <aside class="promo" lang="ko">
+        <p class="promo-title">우리말로 읽는 네트워크 과학</p>
+        <p>위의 네 교과서는 모두 이상훈 교수가 번역에 참여한 한국어판이 에이콘출판사에서 나와 있습니다. 입문서 『네트워크 분석』에서 시작해, 표준 교과서 『네트워크 2/e』와 『네트워크 사이언스』를 거쳐, 『복잡계 네트워크의 자연법칙』까지 차례로 읽어 보세요.</p>
+        <p class="promo-links">
+          <a href="https://www.acornpub.co.kr/product/네트워크-분석/5797/category/25/display/1/">네트워크 분석</a>
+          <a href="https://www.acornpub.co.kr/product/네트워크-2e/5888/category/25/display/1/">네트워크 2/e</a>
+          <a href="https://www.acornpub.co.kr/product/네트워크-사이언스/5911/category/25/display/1/">네트워크 사이언스</a>
+          <a href="https://www.acornpub.co.kr/product/복잡계-네트워크의-자연법칙/6086/category/24/display/1/">복잡계 네트워크의 자연법칙</a>
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    Created by Claude Opus 5.5, based on the lecture slides by Prof. Sang Hoon Lee. All demos run in the browser with no installation, and the source code for each one is on <a href="https://github.com/lshlj82">GitHub</a>.<br><span lang="ko">이상훈 교수의 강의 슬라이드를 바탕으로 Claude Opus 5.5가 만들었습니다. 모든 데모는 설치 없이 브라우저에서 실행되며, 각 데모의 소스 코드는 GitHub에서 볼 수 있습니다.</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  const N = 150;
+  let c = 3, gamma = 2.5, mode = 'poisson', rejected = 0;
+  const KMIN = 2, KCAP = 40;   // power law: k = 2, ..., 40
+  function powerPk(kTop) {
+    const out = new Array(kTop + 1).fill(0); let z = 0;
+    for (let k = KMIN; k <= Math.min(KCAP, kTop); k++) { out[k] = Math.pow(k, -gamma); z += out[k]; }
+    return out.map(q => q / z);
+  }
+  function theoryPk(kTop) {
+    if (mode === 'power') return powerPk(kTop);
+    const out = []; let p = Math.exp(-c); for (let k = 0; k <= kTop; k++) { if (k > 0) p *= c / k; out.push(p); }
+    return out;
+  }
+  function samplePower(cdf) { const u = Math.random(); let k = KMIN; while (k < KCAP && cdf[k] < u) k++; return k; }
+  let deg0, edges, T, t, holdUntil;
+  const X = new Float64Array(N), Y = new Float64Array(N), VX = new Float64Array(N), VY = new Float64Array(N);
+  const ri = n => (Math.random() * n) | 0;
+  function poisson(l) { const L = Math.exp(-l); let k = 0, p = 1; do { k++; p *= Math.random(); } while (p > L); return k - 1; }
+
+  // Draw a Poisson degree sequence and match stubs, rejecting self-loops and multi-edges
+  function sample() {
+    const d = new Int32Array(N); let s = 0;
+    const pk = powerPk(KCAP), cdf = []; let acc = 0; pk.forEach((q, k) => { acc += q; cdf[k] = acc; });
+    for (let i = 0; i < N; i++) { d[i] = mode === 'power' ? samplePower(cdf) : poisson(c); s += d[i]; }
+    if (s % 2) d[ri(N)]++;
+    const left = []; for (let i = 0; i < N; i++) for (let j = 0; j < d[i]; j++) left.push(i);
+    const has = new Set(); edges = []; rejected = 0;
+    while (left.length >= 2) {
+      let ok = false;
+      for (let tries = 0; tries < 200; tries++) {
+        const a = ri(left.length); let b = ri(left.length - 1); if (b >= a) b++;
+        const u = left[a], v = left[b];
+        if (u === v) { rejected++; continue; }                   // self-loop: redraw
+        const key = u < v ? u * N + v : v * N + u;
+        if (has.has(key)) { rejected++; continue; }              // multi-edge: redraw
+        has.add(key); edges.push([u, v]);
+        const hi = Math.max(a, b), lo = Math.min(a, b);
+        left[hi] = left[left.length - 1]; left.pop();
+        left[lo] = left[left.length - 1]; left.pop();
+        ok = true; break;
+      }
+      if (!ok) break;   // only invalid pairs remain (rare): leave those stubs out
+    }
+    deg0 = new Int32Array(N); for (const [u, v] of edges) { deg0[u]++; deg0[v]++; }
+    T = edges.length; t = 0; holdUntil = null;
+    const R = Math.sqrt(N) * 0.75;
+    for (let i = 0; i < N; i++) { const a = Math.random() * 2 * Math.PI, r = R * Math.sqrt(Math.random()); X[i] = Math.cos(a) * r; Y[i] = Math.sin(a) * r; VX[i] = VY[i] = 0; }
+    view.first = true;
+  }
+
+  function layout() {
+    const fx = new Float64Array(N), fy = new Float64Array(N);
+    for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+      let dx = X[i] - X[j], dy = Y[i] - Y[j], d2 = dx * dx + dy * dy;
+      if (d2 > 36) continue; if (d2 < 1e-4) { dx = Math.random() - 0.5; dy = Math.random() - 0.5; d2 = 0.25; }
+      const f = 0.35 / d2; fx[i] += dx * f; fy[i] += dy * f; fx[j] -= dx * f; fy[j] -= dy * f;
+    }
+    const tE = Math.floor(t);
+    for (let e = 0; e < tE; e++) {
+      const [u, v] = edges[e], dx = X[v] - X[u], dy = Y[v] - Y[u], d = Math.hypot(dx, dy) || 0.01;
+      const f = 0.08 * (d - 1) / d; fx[u] += dx * f; fy[u] += dy * f; fx[v] -= dx * f; fy[v] -= dy * f;
+    }
+    for (let i = 0; i < N; i++) {
+      fx[i] -= X[i] * 0.012; fy[i] -= Y[i] * 0.012;
+      VX[i] = (VX[i] + fx[i]) * 0.55; VY[i] = (VY[i] + fy[i]) * 0.55;
+      const s = Math.hypot(VX[i], VY[i]); if (s > 0.4) { VX[i] *= 0.4 / s; VY[i] *= 0.4 / s; }
+      X[i] += VX[i]; Y[i] += VY[i];
+    }
+  }
+
+  // ---------- drawing ----------
+  let C = {};
+  function hex(h) { h = h.trim().replace('#', ''); return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); }
+  function readColors() {
+    const cs = getComputedStyle(document.documentElement);
+    ['ink', 'muted', 'node', 'hub', 'edge', 'paper', 'hi'].forEach(k => C[k] = cs.getPropertyValue('--' + k).trim());
+    C.nodeRGB = hex(C.node); C.hubRGB = hex(C.hub); C.serif = cs.getPropertyValue('--serif').trim();
+  }
+  const net = document.getElementById('netView'), degc = document.getElementById('degView');
+  const nctx = net.getContext('2d'), dctx = degc.getContext('2d');
+  let NW = 0, NH = 0, DW = 0;
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    NW = net.clientWidth; NH = net.clientHeight; DW = degc.clientWidth;
+    net.width = Math.round(NW * dpr); net.height = Math.round(NH * dpr);
+    degc.width = Math.round(DW * dpr); degc.height = Math.round(DW * dpr);
+    nctx.setTransform(dpr, 0, 0, dpr, 0, 0); dctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    view.first = true; draw();
+  }
+
+  const view = { cx: 0, cy: 0, s: 30, first: true };
+  function currentDegrees() {
+    const d = new Int32Array(N), tE = Math.floor(t);
+    for (let e = 0; e < tE; e++) { d[edges[e][0]]++; d[edges[e][1]]++; }
+    return d;
+  }
+
+  function drawNet() {
+    const ctx = nctx; ctx.clearRect(0, 0, NW, NH);
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    for (let i = 0; i < N; i++) { x0 = Math.min(x0, X[i]); x1 = Math.max(x1, X[i]); y0 = Math.min(y0, Y[i]); y1 = Math.max(y1, Y[i]); }
+    const ts = Math.min((NW - 50) / Math.max(4, x1 - x0), (NH - 70) / Math.max(4, y1 - y0));
+    const k = view.first ? 1 : 0.08; view.first = false;
+    view.s += (ts - view.s) * k; view.cx += ((x0 + x1) / 2 - view.cx) * k; view.cy += ((y0 + y1) / 2 - view.cy) * k;
+    const SX = x => NW / 2 + (x - view.cx) * view.s, SY = y => NH / 2 + 10 + (y - view.cy) * view.s;
+
+    const tE = Math.floor(t), cur = currentDegrees();
+    const building = tE < T;
+    let kmax = 1; for (let i = 0; i < N; i++) kmax = Math.max(kmax, deg0[i]);
+    const base = Math.max(1.8, Math.min(3.2, view.s * 0.11));
+    const rad = i => base * (0.9 + 0.42 * Math.sqrt(deg0[i]));
+
+    // formed links
+    ctx.strokeStyle = C.edge; ctx.globalAlpha = 0.6; ctx.lineWidth = 1; ctx.beginPath();
+    for (let e = 0; e < tE; e++) { const [u, v] = edges[e]; ctx.moveTo(SX(X[u]), SY(Y[u])); ctx.lineTo(SX(X[v]), SY(Y[v])); }
+    ctx.stroke(); ctx.globalAlpha = 1;
+
+    // dangling stubs
+    let stubsLeft = 0;
+    const fe = building ? edges[tE] : null, frac = t - tE;
+    if (building) {
+      ctx.strokeStyle = C.node; ctx.fillStyle = C.node; ctx.lineWidth = 1.4;
+      for (let i = 0; i < N; i++) {
+        let left = deg0[i] - cur[i]; if (fe && (fe[0] === i || fe[1] === i)) left--;
+        if (left <= 0) continue; stubsLeft += left;
+        const x = SX(X[i]), y = SY(Y[i]), len = rad(i) + Math.max(5, base * 2.6);
+        for (let j = 0; j < left; j++) {
+          const a = i * 2.39996 + (j + deg0[i] - left) * 2 * Math.PI / deg0[i];
+          const ex = x + Math.cos(a) * len, ey = y + Math.sin(a) * len;
+          ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(ex, ey); ctx.stroke();
+          ctx.beginPath(); ctx.arc(ex, ey, 1.6, 0, 2 * Math.PI); ctx.fill();
+        }
+      }
+    }
+    // the pair being joined right now grows toward each other
+    if (fe) {
+      stubsLeft += 2;
+      const [u, v] = fe, ax = SX(X[u]), ay = SY(Y[u]), bx = SX(X[v]), by = SY(Y[v]), h = Math.min(1, frac * 1.25) / 2;
+      ctx.strokeStyle = C.hi; ctx.lineWidth = 2.6; ctx.beginPath();
+      ctx.moveTo(ax, ay); ctx.lineTo(ax + (bx - ax) * h, ay + (by - ay) * h);
+      ctx.moveTo(bx, by); ctx.lineTo(bx + (ax - bx) * h, by + (ay - by) * h); ctx.stroke();
+      [[ax, ay, u], [bx, by, v]].forEach(([px, py, i]) => { ctx.beginPath(); ctx.arc(px, py, rad(i) + 3, 0, 2 * Math.PI); ctx.stroke(); });
+    }
+
+    // nodes, colored by target degree
+    const order = Array.from({ length: N }, (_, i) => i).sort((a, b) => deg0[a] - deg0[b]);
+    const lk = Math.log(kmax + 1);
+    for (const i of order) {
+      const tt = Math.pow(Math.log(deg0[i] + 1) / lk, 2), a = C.nodeRGB, b = C.hubRGB;
+      ctx.fillStyle = 'rgb(' + [0, 1, 2].map(q => Math.round(a[q] + (b[q] - a[q]) * tt)).join(',') + ')';
+      ctx.beginPath(); ctx.arc(SX(X[i]), SY(Y[i]), rad(i), 0, 2 * Math.PI); ctx.fill();
+      ctx.strokeStyle = C.paper; ctx.lineWidth = 1; ctx.stroke();
+    }
+
+    ctx.fillStyle = C.muted; ctx.font = 'italic 15px ' + C.serif; ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+    ctx.fillText('links ' + tE + ' / ' + T + (building ? ',  stubs left ' + stubsLeft : ',  simple graph (' + rejected + ' pairs redrawn)'), 4, 4);
+  }
+
+  function drawDeg() {
+    const ctx = dctx, w = DW; ctx.clearRect(0, 0, w, w);
+    const L = 44, Rm = 12, Tp = 30, B = w - 44, W = w - L - Rm, H = B - Tp;
+    const cur = currentDegrees(), log = mode === 'power';
+    let kTop = log ? KCAP : 10; for (let i = 0; i < N; i++) kTop = Math.max(kTop, deg0[i] + 1);
+    const tgt = new Array(kTop + 1).fill(0), now = new Array(kTop + 1).fill(0);
+    for (let i = 0; i < N; i++) { tgt[deg0[i]]++; now[Math.min(kTop, cur[i])]++; }
+    const theory = theoryPk(kTop);
+    let X_, Y_, ymax;
+    const yLo = 1e-4, xLo = 1, xHi = 50;
+
+    ctx.strokeStyle = C.muted; ctx.lineWidth = 1; ctx.beginPath();
+    ctx.moveTo(L, Tp - 8); ctx.lineTo(L, B); ctx.lineTo(L + W, B); ctx.stroke();
+    ctx.fillStyle = C.muted; ctx.font = '12px ' + C.serif;
+    if (log) {
+      X_ = k => L + Math.log(k / xLo) / Math.log(xHi / xLo) * W;
+      Y_ = q => B - Math.log(Math.max(q, yLo) / yLo) / Math.log(1 / yLo) * H;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      [1, 2, 5, 10, 20, 50].forEach(k => { ctx.fillText(String(k), X_(k), B + 6); ctx.beginPath(); ctx.moveTo(X_(k), B); ctx.lineTo(X_(k), B + 4); ctx.stroke(); });
+      ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+      [[1, '1'], [0.1, '10⁻¹'], [0.01, '10⁻²'], [0.001, '10⁻³'], [0.0001, '10⁻⁴']].forEach(([q, s]) => { ctx.fillText(s, L - 7, Y_(q)); ctx.beginPath(); ctx.moveTo(L - 4, Y_(q)); ctx.lineTo(L, Y_(q)); ctx.stroke(); });
+    } else {
+      ymax = Math.max(...theory, ...tgt.map(v => v / N)) * 1.25;
+      X_ = k => L + k / kTop * W;
+      Y_ = q => B - Math.min(q, ymax) / ymax * H;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      const kStep = kTop > 14 ? 4 : 2;
+      for (let k = 0; k <= kTop; k += kStep) ctx.fillText(String(k), X_(k), B + 6);
+      ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+      const yStep = ymax > 0.5 ? 0.2 : ymax > 0.25 ? 0.1 : 0.05;
+      for (let q = 0; q <= ymax + 1e-9; q += yStep) ctx.fillText(q.toFixed(yStep < 0.1 ? 2 : 1), L - 6, Y_(q));
+    }
+    ctx.font = 'italic 14px ' + C.serif; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    ctx.fillText('k', L + W / 2, B + 22);
+    ctx.save(); ctx.translate(11, Tp + H / 2); ctx.rotate(-Math.PI / 2); ctx.textBaseline = 'middle'; ctx.fillText('pₖ', 0, 0); ctx.restore();
+
+    const shown = k => !log || k >= 1;
+    // theory (dashed)
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 1.8; ctx.setLineDash([6, 4]); ctx.beginPath();
+    let started = false;
+    theory.forEach((q, k) => { if (!shown(k) || q <= 0 || (log && q < yLo)) return; started ? ctx.lineTo(X_(k), Y_(q)) : ctx.moveTo(X_(k), Y_(q)); started = true; });
+    ctx.stroke(); ctx.setLineDash([]);
+    // target sequence (open circles)
+    ctx.strokeStyle = C.hub; ctx.lineWidth = 1.6;
+    // power law: logarithmic bins so the sparse tail is readable
+    const pts = hist => {
+      if (!log) return hist.map((v, k) => [k, v / N]).filter(([, q]) => q > 0);
+      const out = [], edgesB = [1, 2, 3, 4, 6, 9, 14, 21, 32, 48];
+      for (let b = 0; b + 1 < edgesB.length; b++) {
+        const a = edgesB[b], z = edgesB[b + 1]; let n = 0;
+        for (let k = a; k < z && k < hist.length; k++) n += hist[k];
+        if (n) out.push([Math.sqrt(a * (z - 1)) || a, n / (N * (z - a))]);
+      }
+      return out;
+    };
+    pts(tgt).forEach(([k, q]) => { ctx.beginPath(); ctx.arc(X_(k), Y_(q), log ? 5.5 : 6, 0, 2 * Math.PI); ctx.stroke(); });
+    // links formed so far (dots)
+    ctx.fillStyle = C.node;
+    pts(now).forEach(([k, q]) => { if (!shown(k)) return; ctx.beginPath(); ctx.arc(X_(k), Y_(q), 3.5, 0, 2 * Math.PI); ctx.fill(); });
+
+    // legend
+    ctx.font = '13px ' + C.serif; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    const lx = L + W - 118; let ly = Tp + 2;
+    ctx.strokeStyle = C.ink; ctx.setLineDash([6, 4]); ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(lx + 18, ly); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.ink; ctx.fillText(log ? 'power law' : 'Poisson', lx + 26, ly); ly += 20;
+    ctx.strokeStyle = C.hub; ctx.beginPath(); ctx.arc(lx + 9, ly, 5, 0, 2 * Math.PI); ctx.stroke();
+    ctx.fillStyle = C.ink; ctx.fillText('target', lx + 26, ly); ly += 20;
+    ctx.fillStyle = C.node; ctx.beginPath(); ctx.arc(lx + 9, ly, 3.5, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = C.ink; ctx.fillText('linked so far', lx + 26, ly);
+  }
+
+  function draw() { if (!C.node || !edges || !NW) return; drawNet(); drawDeg(); }
+
+  // ---------- animation ----------
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let running = !reduceMotion, last = performance.now();
+  const toggle = document.getElementById('toggle');
+  function finishInstantly() { t = T; for (let i = 0; i < 400; i++) layout(); view.first = true; draw(); }
+  function restart() { sample(); if (!running) finishInstantly(); else draw(); }
+
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (running) {
+      if (t < T) t = Math.min(T, t + dt * Math.max(14, T / 11));   // whole build takes about 11 s
+      else if (holdUntil === null) holdUntil = now + 7000;
+      else if (now > holdUntil) sample();
+      layout(); layout(); draw();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  toggle.textContent = running ? 'Pause' : 'Play';
+  toggle.addEventListener('click', () => { running = !running; toggle.textContent = running ? 'Pause' : 'Play'; });
+  document.getElementById('restart').addEventListener('click', restart);
+  const cInput = document.getElementById('cInput'), cOut = document.getElementById('cOut');
+  const pLabel = document.getElementById('pLabel');
+  cInput.addEventListener('input', () => {
+    const v = parseFloat(cInput.value);
+    if (mode === 'power') gamma = v; else c = v;
+    cOut.textContent = mode === 'power' ? v.toFixed(1) : v; restart();
+  });
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    if (mode === b.dataset.mode) return;
+    mode = b.dataset.mode;
+    document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    if (mode === 'power') { pLabel.innerHTML = '<i>γ</i>'; cInput.min = 2.1; cInput.max = 3.5; cInput.step = 0.1; cInput.value = gamma; cOut.textContent = gamma.toFixed(1); }
+    else { pLabel.innerHTML = '<i>c</i> = ⟨<i>k</i>⟩'; cInput.min = 1; cInput.max = 6; cInput.step = 0.5; cInput.value = c; cOut.textContent = c; }
+    restart();
+  }));
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readColors(); draw(); });
+  readColors();
+  sample();
+  if (!running) { t = T; for (let i = 0; i < 400; i++) layout(); }
+  new ResizeObserver(resize).observe(document.querySelector('.panels'));
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(draw);
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
