@@ -207,15 +207,15 @@
   <header class="hero">
     <div class="hero-text">
       <h1 lang="ko">경상국립대학교 물리학과<br>네트워크 과학 교과목 보조자료</h1>
-      <p>Eight browser simulations that accompany the course, from the basic elements of a network to dynamics on networks. Open any demo to change the parameters and watch the network respond.</p>
-      <p class="ko" lang="ko" style="margin-top:0.6rem">네트워크의 기본 요소에서 네트워크 동역학까지, 강의와 함께 보는 여덟 가지 브라우저 시뮬레이션입니다. 데모를 열어 매개변수를 바꾸며 네트워크가 어떻게 달라지는지 확인해 보세요.</p>
+      <p>Eleven browser simulations that accompany the course, from the basic elements of a network to dynamics on networks. Open any demo to change the parameters and watch the network respond.</p>
+      <p class="ko" lang="ko" style="margin-top:0.6rem">네트워크의 기본 요소에서 네트워크 동역학까지, 강의와 함께 보는 열한 가지 브라우저 시뮬레이션입니다. 데모를 열어 매개변수를 바꾸며 네트워크가 어떻게 달라지는지 확인해 보세요.</p>
       <p class="credit">Created by Claude Opus 5.5, based on the lecture slides by Prof. Sang Hoon Lee.<span lang="ko">이상훈 교수의 강의 슬라이드를 바탕으로 Claude Opus 5.5가 만들었습니다.</span></p>
     </div>
     <figure class="net-figure">
       <div class="panels">
         <div class="panel">
           <canvas id="netView" aria-label="A configuration model network being assembled by joining stubs in pairs"></canvas>
-          <p>The configuration model, assembled stub by stub. Each node starts with a number of <span class="c-node">stubs</span> (dangling half-links) drawn from a Poisson or a power-law distribution, and random pairs of stubs are <span class="c-hi">joined</span> into links one at a time. A pair that would make a self-loop or a multi-edge is rejected and drawn again, so the result is a simple graph.<span class="ko" lang="ko"><span class="c-node">미연결 링크</span>를 하나씩 이어 조립하는 구조 모형. 각 노드는 푸아송 분포 또는 거듭제곱 분포에서 뽑은 개수의 미연결 링크를 가지고 시작하며, 무작위로 고른 미연결 링크 한 쌍이 차례로 <span class="c-hi">이어져</span> 링크가 됩니다. 자기 고리나 중복 링크를 만드는 쌍은 버리고 다시 고르므로, 결과는 단순 그래프입니다.</span></p>
+          <p>The configuration model, assembled stub by stub. Each node starts with a number of <span class="c-node">stubs</span> (dangling half-links) drawn from a Poisson or a power-law distribution, and random pairs of stubs are <span class="c-hi">joined</span> into links one at a time. A pair that would make a self-loop or a multi-edge is rejected and drawn again, so the result is a simple graph.<span class="ko" lang="ko"><span class="c-node">미연결 링크</span>를 하나씩 이어 조립하는 구성 모형. 각 노드는 푸아송 분포 또는 거듭제곱 분포에서 뽑은 개수의 미연결 링크를 가지고 시작하며, 무작위로 고른 미연결 링크 한 쌍이 차례로 <span class="c-hi">이어져</span> 링크가 됩니다. 자기 고리나 중복 링크를 만드는 쌍은 버리고 다시 고르므로, 결과는 단순 그래프입니다.</span></p>
         </div>
         <div class="panel">
           <canvas id="degView" aria-label="Degree distribution: target sequence, links formed so far, and the theoretical distribution"></canvas>
@@ -235,7 +235,7 @@
         <button id="toggle" type="button">Pause</button>
         <button id="restart" type="button">Restart</button>
       </div>
-      <figcaption>From demo 6, <a href="https://lshlj82.github.io/network-models/">Network models</a>. <span lang="ko">데모 6 「네트워크 모형」에서.</span></figcaption>
+      <figcaption>From demo 9, <a href="https://lshlj82.github.io/network-models/">Network models</a>. <span lang="ko">데모 9 「네트워크 모형」에서.</span></figcaption>
     </figure>
   </header>
 
@@ -306,6 +306,36 @@
         <li class="demo">
           <span class="num">5</span>
           <div>
+            <h3><a href="https://lshlj82.github.io/small-world/">Small-world effect</a><span class="ko" lang="ko">좁은 세상 효과</span></h3>
+            <p>Trees and breadth-first search, why lattices are large worlds while random networks are small, the Watts–Strogatz model, and clustering.</p>
+            <p class="ko" lang="ko">트리와 너비 우선 탐색, 격자는 큰 세상이고 무작위 네트워크는 좁은 세상인 이유, 와츠–스트로가츠 모형, 그리고 뭉침 계수.</p>
+            <div class="links">
+              <a class="primary" href="https://lshlj82.github.io/small-world/">Open demo</a>
+              <a href="https://github.com/lshlj82/small-world">Source on GitHub</a>
+            </div>
+          </div>
+          <div class="eq" aria-label="average path length scales as log N">
+            ⟨<i>ℓ</i>⟩ ∼ log <i>N</i>
+          </div>
+        </li>
+        <li class="demo">
+          <span class="num">6</span>
+          <div>
+            <h3><a href="https://lshlj82.github.io/network-centrality/">Network centrality</a><span class="ko" lang="ko">네트워크 중심도</span></h3>
+            <p>Degree, closeness, and betweenness: which node is the center, the shortest paths behind each measure, and how centrality is distributed.</p>
+            <p class="ko" lang="ko">연결선 수, 근접 중심도, 사이 중심도: 어떤 노드가 중심인지, 각 척도 뒤에 있는 최단 경로, 그리고 중심도의 분포.</p>
+            <div class="links">
+              <a class="primary" href="https://lshlj82.github.io/network-centrality/">Open demo</a>
+              <a href="https://github.com/lshlj82/network-centrality">Source on GitHub</a>
+            </div>
+          </div>
+          <div class="eq" aria-label="betweenness b i equals the sum over pairs h j of sigma h j of i over sigma h j">
+            <i>b</i><sub><i>i</i></sub> = ∑ <span class="frac"><span><i>σ</i><sub><i>hj</i></sub>(<i>i</i>)</span><span><i>σ</i><sub><i>hj</i></sub></span></span>
+          </div>
+        </li>
+        <li class="demo">
+          <span class="num">7</span>
+          <div>
             <h3><a href="https://lshlj82.github.io/SFN/">Scale-free networks</a><span class="ko" lang="ko">척도 없는 네트워크</span></h3>
             <p>Heavy-tailed degree distributions, hubs, and growth by preferential attachment.</p>
             <p class="ko" lang="ko">두꺼운 꼬리를 가진 연결선수 분포, 허브, 그리고 선호적 연결에 의한 성장.</p>
@@ -319,7 +349,22 @@
           </div>
         </li>
         <li class="demo">
-          <span class="num">6</span>
+          <span class="num">8</span>
+          <div>
+            <h3><a href="https://lshlj82.github.io/FP-netsci-course/">Friendship paradox</a><span class="ko" lang="ko">친구 역설</span></h3>
+            <p>Why your friends have more friends than you on average, the two versions of the paradox, and whether it holds for most people.</p>
+            <p class="ko" lang="ko">왜 평균적으로 내 친구들이 나보다 친구가 많은지, 친구 역설의 두 가지 형태, 그리고 그것이 대부분의 사람에게도 성립하는지.</p>
+            <div class="links">
+              <a class="primary" href="https://lshlj82.github.io/FP-netsci-course/">Open demo</a>
+              <a href="https://github.com/lshlj82/FP-netsci-course">Source on GitHub</a>
+            </div>
+          </div>
+          <div class="eq" aria-label="mean degree of friends equals mean k squared over mean k, which is at least mean k">
+            ⟨<i>k</i><sub>friend</sub>⟩ = <span class="frac"><span>⟨<i>k</i><sup>2</sup>⟩</span><span>⟨<i>k</i>⟩</span></span> ≥ ⟨<i>k</i>⟩
+          </div>
+        </li>
+        <li class="demo">
+          <span class="num">9</span>
           <div>
             <h3><a href="https://lshlj82.github.io/network-models/">Network models</a><span class="ko" lang="ko">네트워크 모형</span></h3>
             <p>Random graphs, small-world networks and other models, and the structure each one produces.</p>
@@ -334,7 +379,7 @@
           </div>
         </li>
         <li class="demo">
-          <span class="num">7</span>
+          <span class="num">10</span>
           <div>
             <h3><a href="https://lshlj82.github.io/network-community/">Network communities</a><span class="ko" lang="ko">네트워크 커뮤니티</span></h3>
             <p>Finding groups of densely connected nodes, and measuring how good a division is with modularity.</p>
@@ -349,7 +394,7 @@
           </div>
         </li>
         <li class="demo">
-          <span class="num">8</span>
+          <span class="num">11</span>
           <div>
             <h3><a href="https://lshlj82.github.io/network-dynamics/">Network dynamics</a><span class="ko" lang="ko">네트워크 동역학</span></h3>
             <p>Dynamical processes running on networks, and how the structure of the network shapes their behavior.</p>
