@@ -3,7 +3,7 @@
 
 Landing page for the interactive web demos that accompany *Network Science* (네트워크 과학) in the Department of Physics, Gyeongsang National University.
 
-**Live page:** https://lshlj82.github.io/network-science/
+**Live page:** https://lshlj82.github.io/netsci-course-GNU/
 
 Created by Claude Opus 5.5, based on the lecture slides by Prof. Sang Hoon Lee.
 이상훈 교수의 강의 슬라이드를 바탕으로 Claude Opus 5.5가 만들었습니다.
@@ -31,16 +31,6 @@ The page is a single self-contained `index.html` with no build step. Its header 
 The page supports light and dark mode, adapts to phone screens, and shows the finished network without animation for visitors who have reduced motion turned on.
 
 페이지는 빌드 과정 없이 `index.html` 파일 하나로 이루어져 있습니다. 상단에서는 데모 9의 구성 모형을 실시간으로 실행합니다. 노드 150개가 푸아송 분포 또는 거듭제곱 분포에서 뽑은 개수의 미연결 링크를 받고, 무작위로 고른 미연결 링크 쌍이 하나씩 이어집니다. 자기 고리나 중복 링크를 만드는 쌍은 버리고 다시 고르므로 결과는 단순 그래프입니다.
-
-## Running locally · 로컬에서 실행
-
-Open `index.html` in any modern browser. Fonts load from Google Fonts when online and fall back to system fonts otherwise.
-
-## Deploying · 배포
-
-1. Put `index.html` and this `README.md` at the root of the repository.
-2. In **Settings → Pages**, set the source to the `main` branch, root folder.
-3. The page will be served at `https://lshlj82.github.io/<repository-name>/`.
 
 ## References · 참고문헌
 
