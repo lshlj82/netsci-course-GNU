@@ -24,11 +24,19 @@ Created by Claude Opus 5.5, based on the lecture slides by Prof. Sang Hoon Lee.
 | 10 | Network communities | 네트워크 커뮤니티 | [demo](https://lshlj82.github.io/network-community/) · [source](https://github.com/lshlj82/network-community) |
 | 11 | Network dynamics | 네트워크 동역학 | [demo](https://lshlj82.github.io/network-dynamics/) · [source](https://github.com/lshlj82/network-dynamics) |
 
-## Special lecture · 특강
+## Going further · 더 깊이 보기
+
+### Special lecture · 특강
 
 **Power Laws and Scale-Free Networks** (거듭제곱 법칙과 척도 없는 네트워크): four demos built from Prof. Sang Hoon Lee's lecture at the [2024 Complexity Summer School](https://www.complexity.kr/?p=1268), going further into the topic of demo 7.
 이상훈 교수가 2024 복잡계 여름학교에서 진행한 강의를 바탕으로 만든 네 가지 데모로, 데모 7의 주제를 더 깊이 다룹니다.
 [demo](https://lshlj82.github.io/netsci-summer-school/) · [source](https://github.com/lshlj82/netsci-summer-school)
+
+### Friendship Paradox Explorer · 친구 역설 탐색기
+
+An interactive companion to Prof. Sang Hoon Lee's two 2026 papers on the friendship paradox (*J. Korean Phys. Soc.* 88, 890; *New Phys.: Sae Mulli* 76, 169), going further into the topic of demo 8: do most people's friends really have more friends?
+이상훈 교수의 2026년 친구 역설 논문 두 편과 함께 보는 탐색기로, 데모 8의 주제를 더 깊이 다룹니다.
+[demo](https://lshlj82.github.io/friendship-paradox/) · [source](https://github.com/lshlj82/friendship-paradox)
 
 ## About the page · 페이지 소개
 
