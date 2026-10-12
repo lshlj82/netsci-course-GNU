@@ -24,6 +24,12 @@ Created by Claude Opus 5.5, based on the lecture slides by Prof. Sang Hoon Lee.
 | 10 | Network communities | 네트워크 커뮤니티 | [demo](https://lshlj82.github.io/network-community/) · [source](https://github.com/lshlj82/network-community) |
 | 11 | Network dynamics | 네트워크 동역학 | [demo](https://lshlj82.github.io/network-dynamics/) · [source](https://github.com/lshlj82/network-dynamics) |
 
+## Special lecture · 특강
+
+**Power Laws and Scale-Free Networks** (거듭제곱 법칙과 척도 없는 네트워크): four demos built from Prof. Sang Hoon Lee's lecture at the [2024 Complexity Summer School](https://www.complexity.kr/?p=1268), going further into the topic of demo 7.
+이상훈 교수가 2024 복잡계 여름학교에서 진행한 강의를 바탕으로 만든 네 가지 데모로, 데모 7의 주제를 더 깊이 다룹니다.
+[demo](https://lshlj82.github.io/netsci-summer-school/) · [source](https://github.com/lshlj82/netsci-summer-school)
+
 ## About the page · 페이지 소개
 
 The page is a single self-contained `index.html` with no build step. Its header runs a live version of the configuration model from demo 9: 150 nodes receive a number of stubs drawn from either a Poisson or a power-law distribution, and random pairs of stubs are joined one at a time. Pairs that would create a self-loop or a multi-edge are rejected and redrawn, so the result is a simple graph. A second panel tracks the degree distribution as links form, against the target sequence and the theoretical distribution. For the Poisson case a slider sets the mean degree ⟨*k*⟩ from 1 to 6; for the power law it sets the exponent γ from 2.1 to 3.5, with degrees between 2 and 40, and the plot switches to log–log axes.
