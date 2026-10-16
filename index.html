@@ -646,7 +646,6 @@ button.theme-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; st
 
   function drawDeg() {
     const ctx = dctx, w = DW; ctx.clearRect(0, 0, w, w);
-    const L = 44, Rm = 12, Tp = 30, B = w - 44, W = w - L - Rm, H = B - Tp;
     const cur = currentDegrees(), log = mode === 'power';
     let kTop = log ? KCAP : 10; for (let i = 0; i < N; i++) kTop = Math.max(kTop, deg0[i] + 1);
     const tgt = new Array(kTop + 1).fill(0), now = new Array(kTop + 1).fill(0);
@@ -654,6 +653,20 @@ button.theme-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; st
     const theory = theoryPk(kTop);
     let X_, Y_, ymax;
     const yLo = 1e-4, xLo = 1, xHi = 50;
+
+    // y tick labels, measured so the left margin always fits them and the p_k title
+    let yTicks;
+    if (log) yTicks = [[1, '1'], [0.1, '10⁻¹'], [0.01, '10⁻²'], [0.001, '10⁻³'], [0.0001, '10⁻⁴']];
+    else {
+      ymax = Math.max(...theory, ...tgt.map(v => v / N)) * 1.25;
+      const yStep = ymax > 0.5 ? 0.2 : ymax > 0.25 ? 0.1 : 0.05;
+      yTicks = []; for (let q = 0; q <= ymax + 1e-9; q += yStep) yTicks.push([q, q.toFixed(yStep < 0.1 ? 2 : 1)]);
+    }
+    ctx.font = '12px ' + C.serif;
+    const tickW = Math.max(...yTicks.map(([, s]) => ctx.measureText(s).width));
+    const TICK = 7, GAP = 9, TITLE = 16;                      // label offset from the axis, label-to-title gap, title width
+    const L = Math.ceil(TICK + tickW + GAP + TITLE), Rm = 12, Tp = 30, B = w - 44, W = w - L - Rm, H = B - Tp;
+    const titleX = L - TICK - tickW - GAP - TITLE / 2;       // center of the rotated p_k title
 
     ctx.strokeStyle = C.muted; ctx.lineWidth = 1; ctx.beginPath();
     ctx.moveTo(L, Tp - 8); ctx.lineTo(L, B); ctx.lineTo(L + W, B); ctx.stroke();
@@ -664,21 +677,19 @@ button.theme-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; st
       ctx.textAlign = 'center'; ctx.textBaseline = 'top';
       [1, 2, 5, 10, 20, 50].forEach(k => { ctx.fillText(String(k), X_(k), B + 6); ctx.beginPath(); ctx.moveTo(X_(k), B); ctx.lineTo(X_(k), B + 4); ctx.stroke(); });
       ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
-      [[1, '1'], [0.1, '10⁻¹'], [0.01, '10⁻²'], [0.001, '10⁻³'], [0.0001, '10⁻⁴']].forEach(([q, s]) => { ctx.fillText(s, L - 7, Y_(q)); ctx.beginPath(); ctx.moveTo(L - 4, Y_(q)); ctx.lineTo(L, Y_(q)); ctx.stroke(); });
+      yTicks.forEach(([q, s]) => { ctx.fillText(s, L - TICK, Y_(q)); ctx.beginPath(); ctx.moveTo(L - 4, Y_(q)); ctx.lineTo(L, Y_(q)); ctx.stroke(); });
     } else {
-      ymax = Math.max(...theory, ...tgt.map(v => v / N)) * 1.25;
       X_ = k => L + k / kTop * W;
       Y_ = q => B - Math.min(q, ymax) / ymax * H;
       ctx.textAlign = 'center'; ctx.textBaseline = 'top';
       const kStep = kTop > 14 ? 4 : 2;
       for (let k = 0; k <= kTop; k += kStep) ctx.fillText(String(k), X_(k), B + 6);
       ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
-      const yStep = ymax > 0.5 ? 0.2 : ymax > 0.25 ? 0.1 : 0.05;
-      for (let q = 0; q <= ymax + 1e-9; q += yStep) ctx.fillText(q.toFixed(yStep < 0.1 ? 2 : 1), L - 6, Y_(q));
+      yTicks.forEach(([q, s]) => ctx.fillText(s, L - TICK, Y_(q)));
     }
     ctx.font = 'italic 14px ' + C.serif; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
     ctx.fillText('k', L + W / 2, B + 22);
-    ctx.save(); ctx.translate(11, Tp + H / 2); ctx.rotate(-Math.PI / 2); ctx.textBaseline = 'middle'; ctx.fillText('pₖ', 0, 0); ctx.restore();
+    ctx.save(); ctx.translate(titleX, Tp + H / 2); ctx.rotate(-Math.PI / 2); ctx.textBaseline = 'middle'; ctx.fillText('pₖ', 0, 0); ctx.restore();
 
     const shown = k => !log || k >= 1;
     // theory (dashed)
