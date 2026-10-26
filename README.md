@@ -21,8 +21,12 @@ Created by Claude Opus 5.5, based on the lecture slides by Prof. Sang Hoon Lee.
 | 7 | Scale-free networks | 척도 없는 네트워크 | [demo](https://lshlj82.github.io/SFN/) · [source](https://github.com/lshlj82/SFN) |
 | 8 | Friendship paradox | 친구 역설 | [demo](https://lshlj82.github.io/FP-netsci-course/) · [source](https://github.com/lshlj82/FP-netsci-course) |
 | 9 | Network models | 네트워크 모형 | [demo](https://lshlj82.github.io/network-models/) · [source](https://github.com/lshlj82/network-models) |
+| 9′ | Cutting a tree into stubs (configuration model) | 트리를 미연결 링크로 쪼개어 다시 잇기 | [demo](https://lshlj82.github.io/stub-rewiring/) · [source](https://github.com/lshlj82/stub-rewiring) |
 | 10 | Network communities | 네트워크 커뮤니티 | [demo](https://lshlj82.github.io/network-community/) · [source](https://github.com/lshlj82/network-community) |
 | 11 | Network dynamics | 네트워크 동역학 | [demo](https://lshlj82.github.io/network-dynamics/) · [source](https://github.com/lshlj82/network-dynamics) |
+
+Demo 9′ is a supplement to demo 9. Created by Claude Opus 5.5, based on the slide for Prof. Laurent Hébert-Dufresne’s talk at KIAS on 29 September 2022, it takes the Cayley tree from that slide (190 nodes: 94 of degree 3 and 96 leaves), cuts every link into two stubs, and pairs the 378 stubs again at random, showing that the degree distribution is unchanged while the structure is not.
+데모 9′는 데모 9의 보충 자료입니다. 2022년 9월 29일 고등과학원(KIAS)에서 열린 Laurent Hébert-Dufresne 교수의 강연 슬라이드를 바탕으로 Claude Opus 5.5가 만들었으며, 슬라이드의 케일리 트리(노드 190개: 연결선수 3인 노드 94개와 잎 96개)의 모든 링크를 미연결 링크 둘로 자른 뒤 378개를 무작위로 다시 짝지어, 연결선수 분포는 그대로인데 구조는 달라짐을 보여 줍니다.
 
 ## Going further · 더 깊이 보기
 
@@ -57,3 +61,4 @@ The page supports light and dark mode, adapts to phone screens, and shows the fi
 - Sergey N. Dorogovtsev and José F. F. Mendes, [*The Nature of Complex Networks*](https://global.oup.com/academic/product/the-nature-of-complex-networks-9780199695119) (Oxford University Press, 2022).<br>
   한국어판: [『복잡계 네트워크의 자연법칙』](https://www.acornpub.co.kr/product/복잡계-네트워크의-자연법칙/6086/category/24/display/1/) (에이콘출판사, 2026)
 - Prof. Sang Hoon Lee, lecture slides for Network Science. (이상훈 교수, 네트워크 과학 강의 슬라이드)
+- Prof. Laurent Hébert-Dufresne, slide on the configuration model from his talk at KIAS, 29 September 2022 (demo 9′).
