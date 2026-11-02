@@ -23,7 +23,7 @@ Created by Claude Opus 5.5, based on the lecture slides by Prof. Sang Hoon Lee.
 | 9 | Network models | 네트워크 모형 | [demo](https://lshlj82.github.io/network-models/) · [source](https://github.com/lshlj82/network-models) |
 | 9′ | Cutting a tree into stubs (configuration model) | 트리를 미연결 링크로 쪼개어 다시 잇기 | [demo](https://lshlj82.github.io/stub-rewiring/) · [source](https://github.com/lshlj82/stub-rewiring) |
 | 10 | Network communities | 네트워크 커뮤니티 | [demo](https://lshlj82.github.io/network-community/) · [source](https://github.com/lshlj82/network-community) |
-| 10′ | The Louvain algorithm, step by step | 단계별로 보는 루뱅 알고리즘 | [demo](https://lshlj82.github.io/Louvain-algorithm/) · [source](https://github.com/lshlj82/Louvain-algorithm) |
+| 10′ | The Louvain algorithm, step by step | 단계별로 보는 루뱅 알고리즘 | [demo](https://lshlj82.github.io/Louvain-algorithm/) · [한국어](https://lshlj82.github.io/Louvain-algorithm/ko.html) · [source](https://github.com/lshlj82/Louvain-algorithm) |
 | 11 | Network dynamics | 네트워크 동역학 | [demo](https://lshlj82.github.io/network-dynamics/) · [source](https://github.com/lshlj82/network-dynamics) |
 
 Demo 9′ is a supplement to demo 9. Created by Claude Opus 5.5, based on the slide for Prof. Laurent Hébert-Dufresne’s talk at KIAS on September 29, 2022, during the KIAS-KU International Workshop: Theoretical Challenges in Network Science (September 26–30, 2022), it takes the Cayley tree from that slide (190 nodes: 94 of degree 3 and 96 leaves), cuts every link into two stubs, and joins the 378 stubs again, either exactly as in the network on the other half of the slide or at random, showing that the degree distribution is unchanged while the structure is not.
