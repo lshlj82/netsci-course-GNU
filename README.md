@@ -23,10 +23,14 @@ Created by Claude Opus 5.5, based on the lecture slides by Prof. Sang Hoon Lee.
 | 9 | Network models | 네트워크 모형 | [demo](https://lshlj82.github.io/network-models/) · [source](https://github.com/lshlj82/network-models) |
 | 9′ | Cutting a tree into stubs (configuration model) | 트리를 미연결 링크로 쪼개어 다시 잇기 | [demo](https://lshlj82.github.io/stub-rewiring/) · [source](https://github.com/lshlj82/stub-rewiring) |
 | 10 | Network communities | 네트워크 커뮤니티 | [demo](https://lshlj82.github.io/network-community/) · [source](https://github.com/lshlj82/network-community) |
+| 10′ | The Louvain algorithm, step by step | 단계별로 보는 루뱅 알고리즘 | [demo](https://lshlj82.github.io/Louvain-algorithm/) · [source](https://github.com/lshlj82/Louvain-algorithm) |
 | 11 | Network dynamics | 네트워크 동역학 | [demo](https://lshlj82.github.io/network-dynamics/) · [source](https://github.com/lshlj82/network-dynamics) |
 
 Demo 9′ is a supplement to demo 9. Created by Claude Opus 5.5, based on the slide for Prof. Laurent Hébert-Dufresne’s talk at KIAS on September 29, 2022, during the KIAS-KU International Workshop: Theoretical Challenges in Network Science (September 26–30, 2022), it takes the Cayley tree from that slide (190 nodes: 94 of degree 3 and 96 leaves), cuts every link into two stubs, and joins the 378 stubs again, either exactly as in the network on the other half of the slide or at random, showing that the degree distribution is unchanged while the structure is not.
 데모 9′는 데모 9의 보충 자료입니다. 2022년 9월 26–30일 고등과학원(KIAS)에서 열린 KIAS-KU International Workshop: Theoretical Challenges in Network Science 중 9월 29일 Laurent Hébert-Dufresne 교수님의 강연 슬라이드를 바탕으로 Claude Opus 5.5가 만들었으며, 슬라이드의 케일리 트리(노드 190개: 연결선수 3인 노드 94개와 잎 96개)의 모든 링크를 미연결 링크 둘로 자른 뒤 378개를 슬라이드의 다른 쪽 네트워크 그대로 또는 무작위로 다시 이어, 연결선수 분포는 그대로인데 구조는 달라짐을 보여 줍니다.
+
+Demo 10′ is a supplement to demo 10. Created by Claude Opus 5.5, based on Prof. Sang Hoon Lee's lecture slides on the Louvain algorithm, it steps through the algorithm on the 16-node network from Blondel *et al.* (2008), reproducing the paper's two passes, and runs it repeatedly on Zachary's karate club to show how the random order of node visits changes the result.
+데모 10′는 데모 10의 보충 자료입니다. 루뱅 알고리즘에 관한 이상훈 교수의 강의 슬라이드를 바탕으로 Claude Opus 5.5가 만들었으며, Blondel 등(2008)의 16노드 네트워크에서 알고리즘을 단계별로 따라가 논문의 두 패스를 그대로 재현하고, 재커리의 가라테 클럽에서 여러 번 실행해 노드 방문의 무작위 순서가 결과를 어떻게 바꾸는지 보여 줍니다.
 
 ## Going further · 더 깊이 보기
 
