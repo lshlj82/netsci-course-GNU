@@ -18,6 +18,7 @@
     --hub: #d6453d;
     --edge: #8f9ab0;
     --hi: #e0a800;
+    --hi-text: #8a6400;
     --accent: #b5770f;
     --serif: "STIX Two Text", "Noto Serif KR", "Cambria", "Times New Roman", serif;
     --sans: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
@@ -34,7 +35,7 @@
       --node: #6f93f2;
       --hub: #ff6b5e;
       --edge: #5a6884;
-      --hi: #f5d24e;
+      --hi: #f5d24e; --hi-text: #f5d24e;
       --accent: #e3a43a;
     }
   }
@@ -46,7 +47,7 @@
     --node: #6f93f2;
     --hub: #ff6b5e;
     --edge: #5a6884;
-      --hi: #f5d24e;
+      --hi: #f5d24e; --hi-text: #f5d24e;
     --accent: #e3a43a;
   }
   *, *::before, *::after { box-sizing: inherit; }
@@ -94,7 +95,7 @@
   .panel p .ko { display: block; margin-top: 0.4rem; font-size: 0.92rem; }
   .c-node { color: var(--node); }
   .c-hub { color: var(--hub); }
-  .c-hi { color: var(--hi); font-weight: 600; }
+  .c-hi { color: var(--hi-text); font-weight: 600; }
   .controls {
     display: flex;
     align-items: center;
@@ -183,9 +184,9 @@
   .promo p { margin: 0 0 0.6rem; }
   .promo-title { font-weight: 600; font-size: 1.2rem; }
   .promo-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0 !important; font-family: var(--sans); font-size: 0.95rem; }
-  .promo-links a { font-weight: 600; color: var(--node); text-decoration: none; }
+  .promo-links a { font-weight: 600; color: var(--node); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
   .promo-links a::after { content: " →"; }
-  .promo-links a:hover { text-decoration: underline; }
+  .promo-links a:hover { text-decoration-thickness: 2px; }
   footer {
     border-top: 1px solid var(--rule);
     padding: 2rem 0 3rem;
@@ -226,12 +227,12 @@ button.theme-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; st
     <figure class="net-figure">
       <div class="panels">
         <div class="panel">
-          <canvas id="netView" aria-label="A configuration model network being assembled by joining stubs in pairs"></canvas>
-          <p>The configuration model, assembled stub by stub. Each node starts with a number of <span class="c-node">stubs</span> (dangling half-links) drawn from a Poisson or a power-law distribution, and random pairs of stubs are <span class="c-hi">joined</span> into links one at a time. A pair that would make a self-loop or a multi-edge is rejected and drawn again, so the result is a simple graph.<span class="ko" lang="ko"><span class="c-node">미연결 링크</span>를 하나씩 이어 조립하는 구조 모형. 각 노드는 푸아송 분포 또는 거듭제곱 분포에서 뽑은 개수의 미연결 링크를 가지고 시작하며, 무작위로 고른 미연결 링크 한 쌍이 차례로 <span class="c-hi">이어져</span> 링크가 됩니다. 자기 고리나 중복 링크를 만드는 쌍은 버리고 다시 고르므로, 결과는 단순 그래프입니다.</span></p>
+          <canvas id="netView" role="img" aria-label="A configuration model network being assembled by joining stubs in pairs"></canvas>
+          <p>The configuration model, assembled stub by stub. Each node starts with a number of <span class="c-node">stubs</span> (dangling half-links) drawn from a Poisson or a power-law distribution, and random pairs of stubs are <span class="c-hi">joined</span> into links one at a time. A pair that would make a self-loop or a multi-edge is rejected and drawn again, so the result is a simple graph. If only such pairs are left, the remaining stubs are discarded, so a few realized degrees can fall short of the drawn ones; the count is shown on the network.<span class="ko" lang="ko"><span class="c-node">미연결 링크</span>를 하나씩 이어 조립하는 구조 모형. 각 노드는 푸아송 분포 또는 거듭제곱 분포에서 뽑은 개수의 미연결 링크를 가지고 시작하며, 무작위로 고른 미연결 링크 한 쌍이 차례로 <span class="c-hi">이어져</span> 링크가 됩니다. 자기 고리나 중복 링크를 만드는 쌍은 버리고 다시 고르므로, 결과는 단순 그래프입니다. 그런 쌍만 남으면 나머지 미연결 링크는 버리므로 실제 연결선수가 처음 뽑은 값보다 조금 작을 수 있으며, 버린 개수는 네트워크 그림에 표시합니다.</span></p>
         </div>
         <div class="panel">
-          <canvas id="degView" aria-label="Degree distribution: target sequence, links formed so far, and the theoretical distribution"></canvas>
-          <p>Degree distribution: the target sequence (circles), the links formed so far (dots), and the theory (dashed): the Poisson distribution <i>p</i><sub><i>k</i></sub> = <i>e</i><sup>−<i>c</i></sup><i>c</i><sup><i>k</i></sup>/<i>k</i>!, or the power law <i>p</i><sub><i>k</i></sub> ∝ <i>k</i><sup>−<i>γ</i></sup> for 2 ≤ <i>k</i> ≤ 40 on log–log axes with logarithmic bins.<span class="ko" lang="ko">연결선수 분포: 목표 연결선수열(빈 원), 지금까지 만들어진 링크로 센 연결선수(점), 이론 분포(점선): 푸아송 분포, 또는 로그 구간으로 묶어 로그–로그 축에 그린 거듭제곱 분포 <i>p</i><sub><i>k</i></sub> ∝ <i>k</i><sup>−<i>γ</i></sup> (2 ≤ <i>k</i> ≤ 40).</span></p>
+          <canvas id="degView" role="img" aria-label="Degree distribution: drawn degree sequence, links formed so far, and the theoretical distribution"></canvas>
+          <p>Degree distribution: the degree sequence drawn at the start (circles), the links formed so far (dots), and the theory (dashed): the Poisson distribution <i>p</i><sub><i>k</i></sub> = <i>e</i><sup>−<i>c</i></sup><i>c</i><sup><i>k</i></sup>/<i>k</i>!, or the power law <i>p</i><sub><i>k</i></sub> ∝ <i>k</i><sup>−<i>γ</i></sup> for 2 ≤ <i>k</i> ≤ 40 on log–log axes with logarithmic bins.<span class="ko" lang="ko">연결선수 분포: 처음 뽑은 연결선수열(빈 원), 지금까지 만들어진 링크로 센 연결선수(점), 이론 분포(점선): 푸아송 분포, 또는 로그 구간으로 묶어 로그–로그 축에 그린 거듭제곱 분포 <i>p</i><sub><i>k</i></sub> ∝ <i>k</i><sup>−<i>γ</i></sup> (2 ≤ <i>k</i> ≤ 40).</span></p>
         </div>
       </div>
       <div class="controls">
@@ -534,7 +535,7 @@ button.theme-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; st
     return out;
   }
   function samplePower(cdf) { const u = Math.random(); let k = KMIN; while (k < KCAP && cdf[k] < u) k++; return k; }
-  let deg0, edges, T, t, holdUntil;
+  let deg0, drawn, dropped = 0, edges, T, t, holdUntil, settled = false;
   const X = new Float64Array(N), Y = new Float64Array(N), VX = new Float64Array(N), VY = new Float64Array(N);
   const ri = n => (Math.random() * n) | 0;
   function poisson(l) { const L = Math.exp(-l); let k = 0, p = 1; do { k++; p *= Math.random(); } while (p > L); return k - 1; }
@@ -563,14 +564,17 @@ button.theme-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; st
       }
       if (!ok) break;   // only invalid pairs remain (rare): leave those stubs out
     }
+    // keep the drawn sequence d apart from the realized degrees deg0: leftover stubs that could not be matched are discarded
+    drawn = d; dropped = left.length;
     deg0 = new Int32Array(N); for (const [u, v] of edges) { deg0[u]++; deg0[v]++; }
-    T = edges.length; t = 0; holdUntil = null;
+    T = edges.length; t = 0; holdUntil = null; settled = false;
     const R = Math.sqrt(N) * 0.75;
     for (let i = 0; i < N; i++) { const a = Math.random() * 2 * Math.PI, r = R * Math.sqrt(Math.random()); X[i] = Math.cos(a) * r; Y[i] = Math.sin(a) * r; VX[i] = VY[i] = 0; }
     view.first = true;
   }
 
   function layout() {
+    let mv = 0;
     const fx = new Float64Array(N), fy = new Float64Array(N);
     for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
       let dx = X[i] - X[j], dy = Y[i] - Y[j], d2 = dx * dx + dy * dy;
@@ -586,8 +590,9 @@ button.theme-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; st
       fx[i] -= X[i] * 0.012; fy[i] -= Y[i] * 0.012;
       VX[i] = (VX[i] + fx[i]) * 0.55; VY[i] = (VY[i] + fy[i]) * 0.55;
       const s = Math.hypot(VX[i], VY[i]); if (s > 0.4) { VX[i] *= 0.4 / s; VY[i] *= 0.4 / s; }
-      X[i] += VX[i]; Y[i] += VY[i];
+      X[i] += VX[i]; Y[i] += VY[i]; mv = Math.max(mv, Math.min(s, 0.4));
     }
+    return mv;
   }
 
   // ---------- drawing ----------
@@ -624,6 +629,7 @@ button.theme-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; st
     const ts = Math.min((NW - 50) / Math.max(4, x1 - x0), (NH - 70) / Math.max(4, y1 - y0));
     const k = view.first ? 1 : 0.08; view.first = false;
     view.s += (ts - view.s) * k; view.cx += ((x0 + x1) / 2 - view.cx) * k; view.cy += ((y0 + y1) / 2 - view.cy) * k;
+    view.moving = Math.abs(ts - view.s) > 1e-3 * ts || Math.abs((x0 + x1) / 2 - view.cx) * view.s > 0.3 || Math.abs((y0 + y1) / 2 - view.cy) * view.s > 0.3;
     const SX = x => NW / 2 + (x - view.cx) * view.s, SY = y => NH / 2 + 10 + (y - view.cy) * view.s;
 
     const tE = Math.floor(t), cur = currentDegrees();
@@ -676,14 +682,15 @@ button.theme-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; st
 
     ctx.fillStyle = C.muted; ctx.font = 'italic 15px ' + C.serif; ctx.textAlign = 'left'; ctx.textBaseline = 'top';
     ctx.fillText('links ' + tE + ' / ' + T + (building ? ',  stubs left ' + stubsLeft : ',  simple graph (' + rejected + ' pairs redrawn)'), 4, 4);
+    if (dropped && !building) ctx.fillText(dropped + ' unmatched stub' + (dropped > 1 ? 's' : '') + ' discarded (only invalid pairs were left)', 4, 24);
   }
 
   function drawDeg() {
     const ctx = dctx, w = DW; ctx.clearRect(0, 0, w, w);
     const cur = currentDegrees(), log = mode === 'power';
-    let kTop = log ? KCAP : 10; for (let i = 0; i < N; i++) kTop = Math.max(kTop, deg0[i] + 1);
+    let kTop = log ? KCAP : 10; for (let i = 0; i < N; i++) kTop = Math.max(kTop, drawn[i] + 1);
     const tgt = new Array(kTop + 1).fill(0), now = new Array(kTop + 1).fill(0);
-    for (let i = 0; i < N; i++) { tgt[deg0[i]]++; now[Math.min(kTop, cur[i])]++; }
+    for (let i = 0; i < N; i++) { tgt[drawn[i]]++; now[Math.min(kTop, cur[i])]++; }
     const theory = theoryPk(kTop);
     let X_, Y_, ymax;
     const yLo = 1e-4, xLo = 1, xHi = 50;
@@ -755,7 +762,7 @@ button.theme-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; st
     ctx.strokeStyle = C.ink; ctx.setLineDash([6, 4]); ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(lx + 18, ly); ctx.stroke(); ctx.setLineDash([]);
     ctx.fillStyle = C.ink; ctx.fillText(log ? 'power law' : 'Poisson', lx + 26, ly); ly += 20;
     ctx.strokeStyle = C.hub; ctx.beginPath(); ctx.arc(lx + 9, ly, 5, 0, 2 * Math.PI); ctx.stroke();
-    ctx.fillStyle = C.ink; ctx.fillText('target', lx + 26, ly); ly += 20;
+    ctx.fillStyle = C.ink; ctx.fillText('drawn', lx + 26, ly); ly += 20;
     ctx.fillStyle = C.node; ctx.beginPath(); ctx.arc(lx + 9, ly, 3.5, 0, 2 * Math.PI); ctx.fill();
     ctx.fillStyle = C.ink; ctx.fillText('linked so far', lx + 26, ly);
   }
@@ -763,22 +770,32 @@ button.theme-btn svg{width:20px; height:20px; fill:none; stroke:currentColor; st
   function draw() { if (!C.node || !edges || !NW) return; drawNet(); drawDeg(); }
 
   // ---------- animation ----------
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let running = !reduceMotion, last = performance.now();
+  const reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let running = !reduceMQ.matches, last = performance.now(), visible = true;
   const toggle = document.getElementById('toggle');
   function finishInstantly() { t = T; for (let i = 0; i < 400; i++) layout(); view.first = true; draw(); }
   function restart() { sample(); if (!running) finishInstantly(); else draw(); }
 
+  // the O(N²) layout runs only while the figure is on screen and still building or moving
   function frame(now) {
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
-    if (running) {
+    if (running && visible) {
       if (t < T) t = Math.min(T, t + dt * Math.max(14, T / 11));   // whole build takes about 11 s
       else if (holdUntil === null) holdUntil = now + 7000;
       else if (now > holdUntil) sample();
-      layout(); layout(); draw();
+      if (!settled) {
+        const v = Math.max(layout(), layout());
+        if (t >= T && (v < 0.002 || (holdUntil !== null && now > holdUntil - 4000))) settled = true;   // at rest, or 3 s after the build
+      }
+      if (!settled || view.moving) draw();
     }
     requestAnimationFrame(frame);
   }
+  new IntersectionObserver(es => { visible = es[es.length - 1].isIntersecting; }).observe(net);
+  // follow a change of the reduced-motion setting while the page is open
+  reduceMQ.addEventListener('change', () => {
+    if (reduceMQ.matches && running) { running = false; toggle.textContent = 'Play'; if (t < T) finishInstantly(); }
+  });
 
   toggle.textContent = running ? 'Pause' : 'Play';
   toggle.addEventListener('click', () => { running = !running; toggle.textContent = running ? 'Pause' : 'Play'; });
